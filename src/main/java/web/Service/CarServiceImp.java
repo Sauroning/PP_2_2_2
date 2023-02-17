@@ -22,15 +22,12 @@ public class CarServiceImp implements CarService {
         cars.add(new Car("Reno", 206, 1995));
     }
 
-    public List<Car> getCarsList(String count) {
-        if (count.equals("1") || count.equals("2") || count.equals("3") || count.equals("4")) {
-            List<Car> carsResult = new ArrayList<>();
-            for (int i = 0; i < Integer.parseInt(count); i++) {
-                carsResult.add(cars.get(i));
-            }
-            return carsResult;
-        } else {
+    public List<Car> getCarsList(int count) {
+        if (count < 0 || count >= cars.size()) {
             return cars;
+        } else {
+            return cars.stream().limit(count).toList();
         }
+
     }
 }
